@@ -2,24 +2,44 @@ package com.marques.helpdeskapi.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marques.helpdeskapi.domain.enums.Priority;
 import com.marques.helpdeskapi.domain.enums.Status;
 
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity(name = "tb_incidents")
 public class Incident {
 	
 	@EqualsAndHashCode.Include
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate open_date = LocalDate.now();
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate closed_date;
 	private Priority priority;
 	private Status status;
 	private String title;
 	private String description;
 	
+	@ManyToOne
+	@JoinColumn(name = "technician_id")
 	private Technician technician;
+	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
 	
 	public Incident() {
