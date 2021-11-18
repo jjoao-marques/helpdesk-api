@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,7 +44,8 @@ public abstract class Person implements Serializable{
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PROFILES")
-	protected Set<Integer> profiles = new HashSet<>();
+	@Enumerated(EnumType.STRING)
+	protected Set<Profile> profiles = new HashSet<>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate creation_date = LocalDate.now();
@@ -64,89 +66,68 @@ public abstract class Person implements Serializable{
 		addProfile(Profile.CLIENT);
 	}
 
+	
+	
 
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 
 	public String getPassword() {
 		return password;
 	}
 
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
-	public Set<Profile> getProfiles() {
-		return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
-	}
-
-
-
-	public void addProfile(Profile profile) {
-		this.profiles.add(profile.getCode());
-	}
-
-
 
 	public LocalDate getCreation_date() {
 		return creation_date;
 	}
 
-
-
 	public void setCreation_date(LocalDate creation_date) {
 		this.creation_date = creation_date;
 	}
+
+	public Set<Profile> getProfiles() {
+		return profiles;
+	}
+
+	public void addProfile(Profile profile) {
+		this.profiles.add(profile);
+	}
+
+	
+
 
 	
 	

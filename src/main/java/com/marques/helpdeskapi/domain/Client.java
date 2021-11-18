@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marques.helpdeskapi.domain.enums.Profile;
 
 @Entity(name = "tb_client")
 public class Client extends Person{
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Incident> incidents = new ArrayList<>();
 
