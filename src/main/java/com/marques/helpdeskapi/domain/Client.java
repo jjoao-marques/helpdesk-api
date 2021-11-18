@@ -1,6 +1,7 @@
 package com.marques.helpdeskapi.domain;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +10,11 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marques.helpdeskapi.domain.enums.Profile;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter 
+@Setter
 @Entity(name = "tb_client")
 public class Client extends Person{
 	private static final long serialVersionUID = 1L;
@@ -27,13 +33,6 @@ public class Client extends Person{
 		addProfile(Profile.CLIENT);
 	}
 
-	public List<Incident> getIncidents() {
-		return incidents;
-	}
-
-	public void setIncidents(List<Incident> incidents) {
-		this.incidents = incidents;
-	}
 	
 	
 
