@@ -31,6 +31,7 @@ public class ClientDTO implements Serializable {
 
 	public ClientDTO() {
 		super();
+		addProfile(Profile.CLIENT);
 	}
 
 	public ClientDTO(Client client) {
@@ -42,6 +43,7 @@ public class ClientDTO implements Serializable {
 		this.password = client.getPassword();
 		this.profiles = client.getProfiles();
 		this.creation_date = client.getCreation_date();
+		addProfile(Profile.CLIENT);
 	}
 
 	

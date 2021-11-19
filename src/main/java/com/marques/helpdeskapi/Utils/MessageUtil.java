@@ -5,7 +5,8 @@ public  abstract class MessageUtil {
 	public static final String OBJECT_NOT_FOUND = "Objeto não encontrado!";
 	public static final String CPF_ALREADY_REGISTERED = "CPF já cadastrado!";
 	public static final String EMAIL_ALREADY_REGISTERED = "Email já cadastrado!";
-	public static final String TECHNICIAN_INCIDENTS = "O técnico possui incidents atribuído ao seu nome e não pode ser deletado!";
+	public static final String TECHNICIAN_INCIDENTS = "O técnico possui incidentes atribuído ao seu nome e não pode ser deletado!";
+	public static final String CLIENT_INCIDENTS = "O cliente possui incidentes abertos em seu nome e não pode ser deletado!";
 	
 	
 	//VALIDATORS
