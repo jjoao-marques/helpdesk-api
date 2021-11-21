@@ -9,7 +9,11 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.marques.helpdeskapi.domain.enums.Profile;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity(name = "tb_technician")
 public class Technician extends Person{
 	private static final long serialVersionUID = 1L;
@@ -28,13 +32,7 @@ public class Technician extends Person{
 		addProfile(Profile.CLIENT);
 	}
 
-	public List<Incident> getIncidents() {
-		return incidents;
-	}
 
-	public void setIncidents(List<Incident> incidents) {
-		this.incidents = incidents;
-	}
 	
 	
 	

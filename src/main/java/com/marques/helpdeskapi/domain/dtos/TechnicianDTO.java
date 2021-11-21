@@ -9,12 +9,13 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marques.helpdeskapi.Utils.MessageUtil;
-import com.marques.helpdeskapi.domain.Technician;
 import com.marques.helpdeskapi.domain.enums.Profile;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@AllArgsConstructor
 @Getter
 @Setter
 public class TechnicianDTO implements Serializable {
@@ -45,18 +46,6 @@ public class TechnicianDTO implements Serializable {
 		super();
 		addProfile(Profile.CLIENT);
 	}
-
-	public TechnicianDTO(Technician technician) {
-		this.id = technician.getId();
-		this.name = technician.getName();
-		this.cpf = technician.getCpf();
-		this.email = technician.getEmail();
-		this.password = technician.getPassword();
-		this.profiles = technician.getProfiles();
-		this.creation_date = technician.getCreation_date();
-		addProfile(Profile.CLIENT);
-	}
-
 	
 	public void addProfile(Profile profile) {
 		this.profiles.add(profile);

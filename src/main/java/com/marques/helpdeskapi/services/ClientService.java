@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.marques.helpdeskapi.Utils.MessageUtil;
 import com.marques.helpdeskapi.domain.Client;
@@ -31,6 +30,7 @@ public class ClientService {
 	
     private final ClientMapper clientMapper = ClientMapper.INSTANCE;
 	
+	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id) {
 		Client Client = verifyIfExists(id);
 		return clientMapper.toDTO(Client);
@@ -39,6 +39,7 @@ public class ClientService {
 
 
 	
+	@Transactional(readOnly = true)
 	public List<ClientDTO> findAll() {
 		List<Client> allClients = clientRepository.findAll();
 		return allClients.stream().map(x -> clientMapper.toDTO(x)).collect(Collectors.toList());
@@ -69,6 +70,7 @@ public class ClientService {
 
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO objDTO) {
+		objDTO.setId(id);
 		findById(id);
 		verifyCpfAndEmail(objDTO);
 		Client clientUpdate = clientMapper.toModel(objDTO);

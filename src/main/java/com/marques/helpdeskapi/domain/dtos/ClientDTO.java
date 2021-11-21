@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.marques.helpdeskapi.domain.Client;
 import com.marques.helpdeskapi.domain.enums.Profile;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@AllArgsConstructor
 @Getter
 @Setter
 public class ClientDTO implements Serializable {
@@ -31,18 +31,6 @@ public class ClientDTO implements Serializable {
 
 	public ClientDTO() {
 		super();
-		addProfile(Profile.CLIENT);
-	}
-
-	public ClientDTO(Client client) {
-		super();
-		this.id = client.getId();
-		this.name = client.getName();
-		this.cpf = client.getCpf();
-		this.email = client.getEmail();
-		this.password = client.getPassword();
-		this.profiles = client.getProfiles();
-		this.creation_date = client.getCreation_date();
 		addProfile(Profile.CLIENT);
 	}
 

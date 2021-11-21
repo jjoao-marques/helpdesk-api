@@ -69,6 +69,7 @@ public class TechnicianService {
 
 	@Transactional
 	public TechnicianDTO update(Long id, TechnicianDTO objDTO) {
+		objDTO.setId(id);
 		findById(id);
 		verifyCpfAndEmail(objDTO);
 		Technician technicianUpdate = technicianMapper.toModel(objDTO);

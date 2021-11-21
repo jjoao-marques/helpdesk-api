@@ -9,7 +9,6 @@ import com.marques.helpdeskapi.domain.dtos.TechnicianDTO;
 
 
 @Mapper
-
 public interface TechnicianMapper {
 	
 	TechnicianMapper INSTANCE = Mappers.getMapper(TechnicianMapper.class);
