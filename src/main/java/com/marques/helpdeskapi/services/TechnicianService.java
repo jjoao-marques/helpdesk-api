@@ -51,8 +51,9 @@ public class TechnicianService {
 
 	@Transactional
 	public TechnicianDTO create(TechnicianDTO objDTO) {
-		Technician technicianToSave = technicianMapper.toModel(objDTO);
 		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
+		Technician technicianToSave = technicianMapper.toModel(objDTO);
+		
 		verifyCpfAndEmail(objDTO);
 		technicianRepository.save(technicianToSave);
 		return technicianMapper.toDTO(technicianToSave);

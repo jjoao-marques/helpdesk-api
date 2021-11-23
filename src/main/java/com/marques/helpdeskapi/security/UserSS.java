@@ -26,7 +26,7 @@ public class UserSS implements UserDetails{
 		this.id = id;
 		this.email = email;
 		this.password = password;
-		this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.toString())).collect(Collectors.toSet());
+		this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toSet());
 	}
 
 	@Override

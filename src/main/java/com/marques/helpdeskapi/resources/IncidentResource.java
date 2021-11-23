@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,12 +47,13 @@ public class IncidentResource {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('ADMIN', 'TECHNICIAN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<IncidentDTO> update(@Valid @RequestBody IncidentDTO objDTO, @PathVariable Long id) {
 		return ResponseEntity.ok().body(incidentService.update(id, objDTO));
 	}
 	
-	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		incidentService.delete(id);
