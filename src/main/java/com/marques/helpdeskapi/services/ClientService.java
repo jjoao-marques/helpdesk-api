@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,9 @@ public class ClientService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
     private final ClientMapper clientMapper = ClientMapper.INSTANCE;
 	
 	@Transactional(readOnly = true)
@@ -49,6 +53,7 @@ public class ClientService {
 	@Transactional
 	public ClientDTO create(ClientDTO objDTO) {
 		Client ClientToSave = clientMapper.toModel(objDTO);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		verifyCpfAndEmail(objDTO);
 		clientRepository.save(ClientToSave);
 		return clientMapper.toDTO(ClientToSave);
@@ -71,6 +76,8 @@ public class ClientService {
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO objDTO) {
 		objDTO.setId(id);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
+		
 		findById(id);
 		verifyCpfAndEmail(objDTO);
 		Client clientUpdate = clientMapper.toModel(objDTO);

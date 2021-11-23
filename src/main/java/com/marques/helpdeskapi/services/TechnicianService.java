@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.marques.helpdeskapi.Utils.MessageUtil;
@@ -29,6 +30,9 @@ public class TechnicianService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
     private final TechnicianMapper technicianMapper = TechnicianMapper.INSTANCE;
 	
 	public TechnicianDTO findById(Long id) {
@@ -48,6 +52,7 @@ public class TechnicianService {
 	@Transactional
 	public TechnicianDTO create(TechnicianDTO objDTO) {
 		Technician technicianToSave = technicianMapper.toModel(objDTO);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		verifyCpfAndEmail(objDTO);
 		technicianRepository.save(technicianToSave);
 		return technicianMapper.toDTO(technicianToSave);
@@ -70,6 +75,7 @@ public class TechnicianService {
 	@Transactional
 	public TechnicianDTO update(Long id, TechnicianDTO objDTO) {
 		objDTO.setId(id);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		findById(id);
 		verifyCpfAndEmail(objDTO);
 		Technician technicianUpdate = technicianMapper.toModel(objDTO);
