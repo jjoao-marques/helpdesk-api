@@ -17,13 +17,15 @@ public class UserSS implements UserDetails{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	private String name;
 	private String email;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public UserSS(Long id, String email, String password, Set<Profile> profiles) {
+	public UserSS(Long id, String name, String email, String password, Set<Profile> profiles) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.authorities = profiles.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toSet());
@@ -62,6 +64,10 @@ public class UserSS implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 }
