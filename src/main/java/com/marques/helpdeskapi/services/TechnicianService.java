@@ -78,6 +78,10 @@ public class TechnicianService {
 		objDTO.setId(id);
 		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		findById(id);
+		if(!objDTO.getPassword().equals(objDTO.getPassword()) ) {
+			objDTO.setPassword(encoder.encode(objDTO.getPassword()));
+		}
+		
 		verifyCpfAndEmail(objDTO);
 		Technician technicianUpdate = technicianMapper.toModel(objDTO);
 		technicianRepository.save(technicianUpdate);

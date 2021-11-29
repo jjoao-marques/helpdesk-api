@@ -76,9 +76,11 @@ public class ClientService {
 	@Transactional
 	public ClientDTO update(Long id, ClientDTO objDTO) {
 		objDTO.setId(id);
-		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
-		
 		findById(id);
+		findById(id);
+		if(!objDTO.getPassword().equals(objDTO.getPassword()) ) {
+			objDTO.setPassword(encoder.encode(objDTO.getPassword()));
+		}
 		verifyCpfAndEmail(objDTO);
 		Client clientUpdate = clientMapper.toModel(objDTO);
 		clientRepository.save(clientUpdate);
