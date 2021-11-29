@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marques.helpdeskapi.Utils.MessageUtil;
 import com.marques.helpdeskapi.domain.enums.Profile;
+import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class TechnicianDTO implements Serializable {
 	@NotNull(message = MessageUtil.FIELD_NAME_IS_REQUIRED)
 	protected String name;
 	
-	@NotNull(message = MessageUtil.FIELD_CPF_IS_REQUIRED)
+	@CPF
 	protected String cpf;
 	
 	@NotNull(message = MessageUtil.FIELD_EMAIL_IS_REQUIRED)

@@ -41,7 +41,6 @@ public abstract class Person implements Serializable{
 	protected String name;
 	
 	@EqualsAndHashCode.Include
-	@CPF
 	@Column(unique = true)
 	protected String cpf;
 	

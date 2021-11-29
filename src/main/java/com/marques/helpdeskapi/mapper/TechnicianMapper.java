@@ -14,6 +14,7 @@ public interface TechnicianMapper {
 	TechnicianMapper INSTANCE = Mappers.getMapper(TechnicianMapper.class);
 	
 	@Mapping(target = "incidents", ignore = true)
+	@Mapping(target = "creation_date", source = "creation_date")
 	Technician toModel (TechnicianDTO technicianDTO);
 	
 	TechnicianDTO toDTO(Technician technician);

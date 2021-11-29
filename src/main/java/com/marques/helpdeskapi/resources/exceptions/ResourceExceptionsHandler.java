@@ -1,5 +1,7 @@
 package com.marques.helpdeskapi.resources.exceptions;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -28,7 +30,7 @@ public class ResourceExceptionsHandler {
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandardError> validationErrors (MethodArgumentNotValidException obj) {
+	public ResponseEntity<StandardError> validationErrors (MethodArgumentNotValidException obj, HttpServletRequest request) {
 		ValidationError errors = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), 
 				MessageUtil.VALIDATION_ERRORS);
 		for (FieldError x : obj.getBindingResult().getFieldErrors()) {
