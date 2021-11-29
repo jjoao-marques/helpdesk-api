@@ -15,8 +15,11 @@ public interface TechnicianMapper {
 	
 	@Mapping(target = "incidents", ignore = true)
 	@Mapping(target = "creation_date", source = "creation_date")
+	@Mapping(target = "profiles", source = "profiles")
 	Technician toModel (TechnicianDTO technicianDTO);
 	
+	@Mapping(source = "creation_date", target = "creation_date")
+	@Mapping(source = "profiles", target = "profiles")
 	TechnicianDTO toDTO(Technician technician);
 	
 }
